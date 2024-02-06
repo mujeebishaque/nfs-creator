@@ -4,7 +4,7 @@ nfs_creator.check_running
 
 This module contains functions to check if the nfs service is running.
 '''
-import 
+import subprocess
 
 class NFSServiceChecker:
     ''' A class to check if the nfs service is running. '''
