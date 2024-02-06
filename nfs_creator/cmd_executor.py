@@ -14,7 +14,7 @@ class BashExecutor:
     def execute_cmd(_cmd):
         _p = subprocess.Popen(_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
         
-        # returns output, error tuple
+        # returns (output, error) tuple
         return _p.communicate()
         
 
