@@ -3,7 +3,6 @@ utils.cmd_executor
 ===================
 
 This module contains the static class responsible for executing bash commands and returning the output and error. 
-Return Type: Tuple
 '''
 
 import subprocess
