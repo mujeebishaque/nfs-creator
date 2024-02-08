@@ -18,7 +18,7 @@ class NFSInstaller:
     
     @staticmethod
     def install_nfs_package():
-        ''' A function to install the nfs-utils package. '''
+        ''' A function to install the nfs-utils/common package. '''
         
         if platform.system() == 'Linux':
             
@@ -36,6 +36,8 @@ class NFSInstaller:
                 output, error = BashExecutor.execute_cmd(NFSInstaller.debain_installation_cmd)
                 if error.decode('utf-8'):
                     sys.exit(f'❌ : An error occurred while installing nfs-common!. {error.decode("utf-8")}')
+                print('✅ : nfs-common has been installed successfully!')
+                
             else:
                 sys.exit('This script is only compatible with RPM-based and Debian-based Linux distributions.')
         
