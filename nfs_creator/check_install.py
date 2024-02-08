@@ -38,5 +38,6 @@ class NFSInstallChecker:
             else:
                 print('This script is only compatible with RPM-based and Debian-based Linux distributions.')
                 return None
+        
         return None
         
