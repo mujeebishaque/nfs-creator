@@ -11,8 +11,11 @@ from nfs_creator.cmd_executor import BashExecutor
 RHEL_BASED_OS   = ('CentOS Linux', 'Red Hat Enterprise Linux', 'Fedora')
 DEBIAN_BASED_OS = ('Ubuntu', 'Debian', 'Linux Mint')
 
-CURRENT_OS = platform.linux_distribution()[0]
-
+try:
+    CURRENT_OS = platform.linux_distribution()[0]
+except AttributeError as e:
+    sys.exit('ERROR: This script is only compatible with Linux distributions.')
+    
 class NFSInstaller:
     
     rhel_installation_cmd = 'sudo yum install nfs-utils -y'
