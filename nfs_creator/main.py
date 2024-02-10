@@ -1,5 +1,5 @@
 '''
-nfs_creator.nfs_creator
+main.nfs_creator
 =========================
 
 This module contains the main functions for the nfs-creator package.
