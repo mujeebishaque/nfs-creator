@@ -5,14 +5,14 @@ nfs_creator.nfs_installer
 This module contains functions to install the nfs-utils package.
 '''
 
-import sys, platform
+import sys, distro
 from nfs_creator.cmd_executor import BashExecutor
 
-RHEL_BASED_OS   = ('CentOS Linux', 'Red Hat Enterprise Linux', 'Fedora')
+RHEL_BASED_OS   = ('CentOS Linux', 'Red Hat Enterprise Linux', 'Fedora', 'Rocky Linux', 'AlmaLinux', 'centos') 
 DEBIAN_BASED_OS = ('Ubuntu', 'Debian', 'Linux Mint')
 
 try:
-    CURRENT_OS = platform.linux_distribution()[0]
+    CURRENT_OS = distro.name()
 except AttributeError as e:
     sys.exit('ERROR: This script is only compatible with Linux distributions.')
     
