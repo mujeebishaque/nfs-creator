@@ -1,5 +1,5 @@
 '''
-main.nfs_creator
+nfs_creator.main
 =========================
 
 This module contains the main functions for the nfs-creator package.
@@ -8,8 +8,11 @@ This module contains the main functions for the nfs-creator package.
 import sys
 from nfs_service import NFSService
 from cmd_executor import BashExecutor
-from package_installer import NFSInstaller
 from nfs_installation_checker import NFSInstallChecker
+from package_installer import (
+    NFSInstaller, CURRENT_OS, 
+    RHEL_BASED_OS, DEBIAN_BASED_OS
+    )
 
 class NFSCreator:
     
@@ -44,7 +47,37 @@ class NFSCreator:
             sys.exit(f'❌ : An error occurred while setting permissions on the export directory!. {error.decode("utf-8")}')
         
         print('✅ : NFS share created successfully!')
-    
+
+        export_cmd = f'{self.export_dir}  *(rw,sync,no_root_squash)'
+        _, error = BashExecutor.execute_cmd(f'echo "{export_cmd}" | sudo tee -a /etc/exports')
+        
+        _, error = BashExecutor.execute_cmd('sudo exportfs -a')
+        if error.decode('utf-8'):
+            sys.exit(f'❌ : exportfs failed!. {error.decode("utf-8")}')
+        
+        if CURRENT_OS in DEBIAN_BASED_OS:
+            _, error = BashExecutor.execute_cmd('sudo systemctl restart nfs-kernel-server')
+            if error.decode('utf-8'):
+                sys.exit(f'❌ : nfs-kernel-server restart failed!. {error.decode("utf-8")}')
+        
+        if CURRENT_OS in RHEL_BASED_OS:
+            _, error = BashExecutor.execute_cmd('sudo systemctl restart nfs-server')
+            if error.decode('utf-8'):
+                sys.exit(f'❌ : nfs-server restart failed!. {error.decode("utf-8")}')
+        
+        _, error = BashExecutor.execute_cmd('sudo showmount -e')
+        if error.decode('utf-8'):
+            sys.exit(f'❌ : showmount command failed!. {error.decode("utf-8")}')
+            
+        if error.decode('utf-8'):
+            sys.exit(f'❌ : showmount command failed!. {error.decode("utf-8")}')
+            
+
+def main_nfs_creator(export_dir: str = '/var/data/'):
+    ''' A function to create an nfs share. '''
+    n = NFSCreator(export_dir)
+    n.create_nfs()
 
 if __name__ == "__main__":
-    pass
+    nfs_export_dir = sys.argv[1]
+    main_nfs_creator(nfs_export_dir)
