@@ -25,24 +25,21 @@ class NFSInstaller:
     def install_nfs_package():
         ''' A function to install the nfs-utils/common package. '''
         
-        if platform.system() == 'Linux':
             
-            if CURRENT_OS in RHEL_BASED_OS:
-                
-                output, error = BashExecutor.execute_cmd(NFSInstaller.rhel_installation_cmd)
-                if error.decode('utf-8'):
-                    sys.exit(f'❌ : An error occurred while installing nfs-utils!. {error.decode("utf-8")}')
-                print('✅ : nfs-utils has been installed successfully!')
-                
-            elif CURRENT_OS in DEBIAN_BASED_OS:
-                
-                output, error = BashExecutor.execute_cmd(NFSInstaller.debain_installation_cmd)
-                if error.decode('utf-8'):
-                    sys.exit(f'❌ : An error occurred while installing nfs-common!. {error.decode("utf-8")}')
-                print('✅ : nfs-common has been installed successfully!')
-                
-            else:
-                sys.exit('This script is only compatible with RPM-based and Debian-based Linux distributions.')
-        
+        if CURRENT_OS in RHEL_BASED_OS:
+            
+            _, error = BashExecutor.execute_cmd(NFSInstaller.rhel_installation_cmd)
+            if error.decode('utf-8'):
+                sys.exit(f'❌ : An error occurred while installing nfs-utils!. {error.decode("utf-8")}')
+            print('✅ : nfs-utils has been installed successfully!')
+            
+        elif CURRENT_OS in DEBIAN_BASED_OS:
+            
+            _, error = BashExecutor.execute_cmd(NFSInstaller.debain_installation_cmd)
+            if error.decode('utf-8'):
+                sys.exit(f'❌ : An error occurred while installing nfs-common!. {error.decode("utf-8")}')
+            print('✅ : nfs-common has been installed successfully!')
+            
         else:
-            sys.exit('Please run this script on a Linux machine.')
+            sys.exit('This script is only compatible with RPM-based and Debian-based Linux distributions.')
+    
