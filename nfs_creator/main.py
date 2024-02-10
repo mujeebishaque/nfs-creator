@@ -37,7 +37,7 @@ class NFSCreator:
         
         self.init_nfs()
         
-        print('✅ : Creating an nfs share...')
+        print('ℹ : Creating an nfs share...')
         _, error = BashExecutor.execute_cmd(f'sudo mkdir -p {self.export_dir}')
         if error.decode('utf-8'):
             sys.exit(f'❌ : An error occurred while creating the export directory!. {error.decode("utf-8")}')
@@ -50,7 +50,9 @@ class NFSCreator:
 
         export_cmd = f'{self.export_dir}  *(rw,sync,no_root_squash)'
         _, error = BashExecutor.execute_cmd(f'echo "{export_cmd}" | sudo tee -a /etc/exports')
-        
+        if error.decode('utf-8'):
+            sys.exit(f'❌ : An error occurred while adding the export to /etc/exports!. {error.decode("utf-8")}')
+            
         _, error = BashExecutor.execute_cmd('sudo exportfs -a')
         if error.decode('utf-8'):
             sys.exit(f'❌ : exportfs failed!. {error.decode("utf-8")}')
@@ -66,9 +68,6 @@ class NFSCreator:
                 sys.exit(f'❌ : nfs-server restart failed!. {error.decode("utf-8")}')
         
         _, error = BashExecutor.execute_cmd('sudo showmount -e')
-        if error.decode('utf-8'):
-            sys.exit(f'❌ : showmount command failed!. {error.decode("utf-8")}')
-            
         if error.decode('utf-8'):
             sys.exit(f'❌ : showmount command failed!. {error.decode("utf-8")}')
             

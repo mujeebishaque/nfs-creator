@@ -3,4 +3,4 @@ author: 	Abdul Mujeeb; @mujeebishaque
 '''
 
 
-from nfs_creator import NFS_Creator
+from nfs_creator import main_nfs_creator
