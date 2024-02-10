@@ -8,12 +8,15 @@ This module contains functions to install the nfs-utils package.
 import sys, platform
 from nfs_creator.cmd_executor import BashExecutor
 
+RHEL_BASED_OS   = ('CentOS Linux', 'Red Hat Enterprise Linux', 'Fedora')
+DEBIAN_BASED_OS = ('Ubuntu', 'Debian', 'Linux Mint')
+
+CURRENT_OS = platform.linux_distribution()[0]
+
 class NFSInstaller:
     
-    rhel_based = ('CentOS Linux', 'Red Hat Enterprise Linux', 'Fedora')
     rhel_installation_cmd = 'sudo yum install nfs-utils -y'
     
-    debian_based = ('Ubuntu', 'Debian', 'Linux Mint')
     debain_installation_cmd = 'sudo apt-get install nfs-common -y'
     
     @staticmethod
@@ -22,7 +25,7 @@ class NFSInstaller:
         
         if platform.system() == 'Linux':
             
-            if platform.linux_distribution()[0] in NFSInstaller.rhel_based:
+            if CURRENT_OS in RHEL_BASED_OS:
                 
                 output, error = BashExecutor.execute_cmd(NFSInstaller.rhel_installation_cmd)
                 if 'Complete!' in output.decode('utf-8'):
@@ -31,7 +34,7 @@ class NFSInstaller:
                     sys.exit(f'❌ : An error occurred while installing nfs-utils!. {error.decode("utf-8")}')
                     
                     
-            elif platform.linux_distribution()[0] in NFSInstaller.debian_based:
+            elif CURRENT_OS in DEBIAN_BASED_OS:
                 
                 output, error = BashExecutor.execute_cmd(NFSInstaller.debain_installation_cmd)
                 if error.decode('utf-8'):
