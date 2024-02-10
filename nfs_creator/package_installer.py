@@ -16,7 +16,6 @@ CURRENT_OS = platform.linux_distribution()[0]
 class NFSInstaller:
     
     rhel_installation_cmd = 'sudo yum install nfs-utils -y'
-    
     debain_installation_cmd = 'sudo apt-get install nfs-common -y'
     
     @staticmethod
@@ -28,12 +27,10 @@ class NFSInstaller:
             if CURRENT_OS in RHEL_BASED_OS:
                 
                 output, error = BashExecutor.execute_cmd(NFSInstaller.rhel_installation_cmd)
-                if 'Complete!' in output.decode('utf-8'):
-                    print('✅ : nfs-utils has been installed successfully!')
                 if error.decode('utf-8'):
                     sys.exit(f'❌ : An error occurred while installing nfs-utils!. {error.decode("utf-8")}')
-                    
-                    
+                print('✅ : nfs-utils has been installed successfully!')
+                
             elif CURRENT_OS in DEBIAN_BASED_OS:
                 
                 output, error = BashExecutor.execute_cmd(NFSInstaller.debain_installation_cmd)
