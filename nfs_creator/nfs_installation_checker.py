@@ -5,7 +5,7 @@ nfs_creator.check_install
 This module contains functions to check if the nfs-utils is installed.
 '''
 
-import platform, subprocess
+import sys, platform, subprocess
 
 class NFSInstallChecker:
     ''' A class to check if the nfs-utils package is installed. '''
@@ -36,8 +36,7 @@ class NFSInstallChecker:
                 return True
             
             else:
-                print('This script is only compatible with RPM-based and Debian-based Linux distributions.')
-                return None
-        
-        return None
+                sys.exit('This script is only compatible with RPM-based and Debian-based Linux distributions.')
+                
+        sys.exit('Please run this script on a Linux machine.')
         
