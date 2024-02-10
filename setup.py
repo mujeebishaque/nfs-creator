@@ -9,3 +9,4 @@ setup(
 )
 
 # command to build the python dist: python setup.py sdist bdist_wheel
+# command to install the package: pip install dist/nfs_creator-0.1-py3-none-any.whl

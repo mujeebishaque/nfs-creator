@@ -6,8 +6,8 @@ This module contains functions to check if the nfs service is running.
 '''
 
 import sys
-from cmd_executor import BashExecutor
-from package_installer import CURRENT_OS, RHEL_BASED_OS, DEBIAN_BASED_OS
+from nfs_creator.cmd_executor import BashExecutor
+from nfs_creator.package_installer import CURRENT_OS, RHEL_BASED_OS, DEBIAN_BASED_OS
 from nfs_creator.nfs_installation_checker import NFSInstallChecker
 
 

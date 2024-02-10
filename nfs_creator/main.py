@@ -6,10 +6,10 @@ This module contains the main functions for the nfs-creator package.
 '''
 
 import sys
-from nfs_service import NFSService
-from cmd_executor import BashExecutor
-from nfs_installation_checker import NFSInstallChecker
-from package_installer import (
+from nfs_creator.nfs_service import NFSService
+from nfs_creator.cmd_executor import BashExecutor
+from nfs_creator.nfs_installation_checker import NFSInstallChecker
+from nfs_creator.package_installer import (
     NFSInstaller, CURRENT_OS, 
     RHEL_BASED_OS, DEBIAN_BASED_OS
     )
@@ -72,11 +72,11 @@ class NFSCreator:
             sys.exit(f'❌ : showmount command failed!. {error.decode("utf-8")}')
             
 
-def main_nfs_creator(export_dir: str = '/var/data/'):
+def nfs_creator(export_dir: str = '/var/data/'):
     ''' A function to create an nfs share. '''
     n = NFSCreator(export_dir)
     n.create_nfs()
 
 if __name__ == "__main__":
     nfs_export_dir = sys.argv[1]
-    main_nfs_creator(nfs_export_dir)
+    nfs_creator(nfs_export_dir)
