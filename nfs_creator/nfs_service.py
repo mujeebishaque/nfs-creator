@@ -37,8 +37,6 @@ class NFSService:
             elif CURRENT_OS in RHEL_BASED_OS:
                 
                 _, _ = BashExecutor.execute_cmd(NFSService.rhel_enable_cmd)
-                if error.decode('utf-8'):
-                    sys.exit(f"❌ Error enabling nfs-server: {error}")
                 
                 _, error = BashExecutor.execute_cmd(NFSService.rhel_start_cmd)
                 if error.decode('utf-8'):
