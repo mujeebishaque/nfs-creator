@@ -48,7 +48,7 @@ class NFSCreator:
         
         print('✅ : NFS share created successfully!')
 
-        export_cmd = f'{self.export_dir}  *(rw,sync,no_root_squash,no_subtree_check)'
+        export_cmd = f'{self.export_dir}  *(rw,sync,no_root_squash,no_subtree_check,insecure)'
         _, error = BashExecutor.execute_cmd(f'echo "{export_cmd}" | sudo tee -a /etc/exports')
         if error.decode('utf-8'):
             sys.exit(f'❌ : An error occurred while adding the export to /etc/exports!. {error.decode("utf-8")}')
