@@ -19,7 +19,7 @@ except AttributeError as e:
 class NFSInstaller:
     
     rhel_installation_cmd = 'sudo yum install nfs-utils -y'
-    debain_installation_cmd = 'sudo apt-get install nfs-common -y'
+    debain_installation_cmd = 'sudo apt-get install nfs-common -y && sudo apt install nfs-server -y'
     
     @staticmethod
     def install_nfs_package():
