@@ -28,21 +28,19 @@ class NFSService:
             
             if CURRENT_OS in DEBIAN_BASED_OS:
                 
-                output, error = BashExecutor.execute_cmd(NFSService.debian_enable_cmd)
-                if error.decode('utf-8'):
-                    sys.exit(f"❌  Error enabling nfs-kernel-server: {error}")
+                _, _ = BashExecutor.execute_cmd(NFSService.debian_enable_cmd)
                 
-                output, error = BashExecutor.execute_cmd(NFSService.debian_start_cmd)
+                _, error = BashExecutor.execute_cmd(NFSService.debian_start_cmd)
                 if error.decode('utf-8'):
                     sys.exit(f"❌ Error starting nfs-kernel-server: {error}")
             
             elif CURRENT_OS in RHEL_BASED_OS:
                 
-                output, error = BashExecutor.execute_cmd(NFSService.rhel_enable_cmd)
+                _, _ = BashExecutor.execute_cmd(NFSService.rhel_enable_cmd)
                 if error.decode('utf-8'):
                     sys.exit(f"❌ Error enabling nfs-server: {error}")
                 
-                output, error = BashExecutor.execute_cmd(NFSService.rhel_start_cmd)
+                _, error = BashExecutor.execute_cmd(NFSService.rhel_start_cmd)
                 if error.decode('utf-8'):
                     sys.exit(f"❌ Error starting nfs-server: {error}")
                 
