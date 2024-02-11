@@ -9,6 +9,7 @@ import sys
 from nfs_creator.nfs_service import NFSService
 from nfs_creator.cmd_executor import BashExecutor
 from nfs_creator.nfs_installation_checker import NFSInstallChecker
+from nfs_creator.firewall_settings import configure_firewall_nfs
 from nfs_creator.package_installer import (
     NFSInstaller, CURRENT_OS, 
     RHEL_BASED_OS, DEBIAN_BASED_OS
@@ -76,6 +77,7 @@ def nfs_creator(export_dir: str = '/var/data/'):
     ''' A function to create an nfs share. '''
     n = NFSCreator(export_dir)
     n.create_nfs()
+    configure_firewall_nfs()
 
 if __name__ == "__main__":
     nfs_export_dir = sys.argv[1]
