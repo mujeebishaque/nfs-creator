@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='nfs_creator',
-    version='0.1',
+    version='1.0',
     packages=find_packages(),
     install_requires=[
         'distro==1.9.0'
