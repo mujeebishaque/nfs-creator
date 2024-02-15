@@ -6,9 +6,7 @@ This module contains functions to check if the nfs-utils is installed.
 '''
 
 import sys, subprocess
-from nfs_creator.package_installer import (
-    CURRENT_OS, RHEL_BASED_OS, DEBIAN_BASED_OS
-    )
+from nfs_creator.package_installer import is_debian_based, is_rhel_based
 
 class NFSInstallChecker:
     ''' A class to check if the nfs-utils package is installed. '''
@@ -16,7 +14,7 @@ class NFSInstallChecker:
     @staticmethod
     def is_installed():
         
-        if CURRENT_OS in RHEL_BASED_OS:
+        if is_rhel_based():
     
             out, _ = subprocess.Popen(['rpm -q nfs-utils'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True).communicate()
     
@@ -25,7 +23,7 @@ class NFSInstallChecker:
                 return False
             return True
             
-        elif CURRENT_OS in DEBIAN_BASED_OS:
+        elif is_debian_based():
     
             out, _ = subprocess.Popen(['dpkg -s nfs-common | grep Status'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True).communicate()
 

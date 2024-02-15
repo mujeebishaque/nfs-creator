@@ -7,7 +7,7 @@ This module contains functions to check if the nfs service is running.
 
 import sys
 from nfs_creator.cmd_executor import BashExecutor
-from nfs_creator.package_installer import CURRENT_OS, RHEL_BASED_OS, DEBIAN_BASED_OS
+from nfs_creator.package_installer import  is_debian_based, is_rhel_based
 from nfs_creator.nfs_installation_checker import NFSInstallChecker
 
 
@@ -26,7 +26,7 @@ class NFSService:
         
         if NFSInstallChecker.is_installed():
             
-            if CURRENT_OS in DEBIAN_BASED_OS:
+            if is_debian_based():
                 
                 _, _ = BashExecutor.execute_cmd(NFSService.debian_enable_cmd)
                 
@@ -34,7 +34,7 @@ class NFSService:
                 if error.decode('utf-8'):
                     sys.exit(f"❌ Error starting nfs-kernel-server: {error}")
             
-            elif CURRENT_OS in RHEL_BASED_OS:
+            elif is_rhel_based():
                 
                 _, _ = BashExecutor.execute_cmd(NFSService.rhel_enable_cmd)
                 

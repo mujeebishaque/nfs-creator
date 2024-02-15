@@ -11,10 +11,7 @@ from nfs_creator.cmd_executor import BashExecutor
 from nfs_creator.nfs_installation_checker import NFSInstallChecker
 from nfs_creator.firewall_settings import configure_firewall_nfs
 from nfs_creator.open_permissions import nobody_permissions
-from nfs_creator.package_installer import (
-    NFSInstaller, CURRENT_OS, 
-    RHEL_BASED_OS, DEBIAN_BASED_OS
-    )
+from nfs_creator.package_installer import NFSInstaller, is_debian_based, is_rhel_based
 
 class NFSCreator:
     
@@ -59,12 +56,12 @@ class NFSCreator:
         if error.decode('utf-8'):
             sys.exit(f'❌ : exportfs failed!. {error.decode("utf-8")}')
         
-        if CURRENT_OS in DEBIAN_BASED_OS:
+        if is_debian_based():
             _, error = BashExecutor.execute_cmd('sudo systemctl restart nfs-kernel-server')
             if error.decode('utf-8'):
                 sys.exit(f'❌ : nfs-kernel-server restart failed!. {error.decode("utf-8")}')
         
-        if CURRENT_OS in RHEL_BASED_OS:
+        if is_rhel_based():
             _, error = BashExecutor.execute_cmd('sudo systemctl restart nfs-server')
             if error.decode('utf-8'):
                 sys.exit(f'❌ : nfs-server restart failed!. {error.decode("utf-8")}')
