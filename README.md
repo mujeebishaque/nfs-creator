@@ -16,19 +16,24 @@ Remove the lines added at the bottom. Both of the duplicate entries.
 Tested on Ubuntu and CentOS Stream 8.
 
 ## Description
-Wimex NFS creator is a utility package that can be installed via pip. It's used to test the host system of installation of nfs utility tools and check if the services are running. It's responsible to install NFS if it's not already installed. It's also responsible to create an NFS export.
+Wimex NFS creator (creates an NFS export/share/dir) is a utility package that can be installed via pip. It's used to test the host system of installation of nfs utility tools and check if the services are running. It's responsible to install NFS if it's not already installed and also responsible to create an NFS export.
 
 ## Installation
 ```sudo pip3 install nfs-creator```
 
 ## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+```
+from nfs_creator import nfs_creator
+nfs_creator() # by default the nfs export would be created at /var/data/
 
+# provide a custom path
+nfs_creator('/var/application')
+```
 ## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+@mujeebishaque 
 
 ## License
-For open source projects, say how it is licensed.
+Closed Source
 
 ## Project status
 Complete - Open for improvements.
