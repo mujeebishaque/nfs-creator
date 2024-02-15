@@ -7,6 +7,8 @@ setup(
     install_requires=[
         'distro==1.9.0'
     ],
+    long_description=open('README.md').read(),
+    long_description_content_type='text/markdown',
 )
 
 # command to build the python dist: python setup.py sdist bdist_wheel
