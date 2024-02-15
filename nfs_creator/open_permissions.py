@@ -7,7 +7,7 @@ This module contains functions to open permissions on the nfs export directory.
 
 import sys
 from nfs_creator.cmd_executor import BashExecutor
-from package_installer import is_debian_based, is_rhel_based
+from nfs_creator.package_installer import is_debian_based, is_rhel_based
 
 def nobody_permissions(export_dir: str):
     ''' A function to open permissions on the nfs export directory. '''
