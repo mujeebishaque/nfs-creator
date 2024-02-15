@@ -15,10 +15,10 @@ def configure_firewall_nfs():
     print('⚠ : Attemping to install firewalld ...')
     
     if is_debian_based():
-        _, _ = BashExecutor.execute_cmd('sudo apt install firewalld -y')
+        _, _ = BashExecutor.execute_cmd('sudo apt install firewalld -y && sudo systemctl start firewalld && sudo systemctl enable firewalld')
     
     if is_rhel_based():
-        _, _ = BashExecutor.execute_cmd('sudo yum install firewalld -y')
+        _, _ = BashExecutor.execute_cmd('sudo yum install firewalld -y && sudo systemctl start firewalld && sudo systemctl enable firewalld')
 
     
     print('⚠ : Configuring firewall settings...')
