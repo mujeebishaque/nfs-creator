@@ -4,10 +4,15 @@
 WIMEX NFS creator.
 
 ## Test and Deploy
+A common error
+--
 
 ❌ : exportfs failed!. exportfs: duplicated export entries:
+
 exportfs:       *:/var/data
+
 exportfs:       *:/var/data
+
 
 To fix the above error, edit this file and remove the newly added entries: 
 ```sudo vi /etc/exports```
