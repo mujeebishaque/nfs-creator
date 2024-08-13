@@ -1,6 +1,6 @@
 
 ## Installation
-```sudo pip3 install nfs-creator```
+```pip install nfs-creator```
 
 ## Usage
 ```
