@@ -1,3 +1,5 @@
+## Description
+NFS creator (creates an NFS export/share/dir) is a utility package that can be installed via pip. it is used to install NFS tools/server, create, test, export NFS disk. All by using a single command mentioned above. 
 
 ## Installation
 ```pip install nfs-creator```
@@ -31,8 +33,6 @@ sudo vi /etc/exports
 
 Tested on Ubuntu and CentOS Stream 8.
 
-## Description
-NFS creator (creates an NFS export/share/dir) is a utility package that can be installed via pip. it is used to install NFS tools/server, create, test, export NFS disk. All by using a single command mentioned above. 
 
 ## Authors and acknowledgment
 @mujeebishaque 
